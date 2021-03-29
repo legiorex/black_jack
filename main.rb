@@ -1,5 +1,6 @@
 require './actions/action_black_jack'
 require './actions/action_user'
+require './modules/welcome'
 # require_relative 'name_card'
 # require_relative 'suit_card'
 require_relative 'player'
@@ -10,8 +11,12 @@ require_relative 'user'
 require_relative 'dealer'
 
 class Main
+  include Welcome
+
   def initialize
     puts 'Давай сыграем!'
+    self.class.welcome
+
     @black_jack = BlackJack.new
 
     puts 'Представьтесь'
