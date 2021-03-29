@@ -7,12 +7,8 @@ class User < Player
   end
 
   def print_cards
-    p cards
-    cards.each do |item|
-      # puts "card #{item}"
-      # puts "card !!!  #{item.card}"
-      card = item.card
-      # puts "#{card[:name]} #{card[:suit][:suit_tile]} #{send(puts, card[:suit][:icon_code].to_s)}"
+    cards.each do |card|
+      puts "#{card.name} #{card.suit[:suit_tile]} #{card.suit[:icon_code]}"
     end
   end
 end

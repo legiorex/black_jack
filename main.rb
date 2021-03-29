@@ -1,10 +1,8 @@
 require './actions/action_black_jack'
 require './actions/action_user'
 require './modules/welcome'
-# require_relative 'name_card'
-# require_relative 'suit_card'
 require_relative 'player'
-require_relative 'play_deck'
+require_relative 'deck'
 require_relative 'card'
 require_relative 'black_jack'
 require_relative 'user'
@@ -17,39 +15,19 @@ class Main
     puts 'Давай сыграем!'
     self.class.welcome
 
-    @black_jack = BlackJack.new
-
     puts 'Представьтесь'
     user_name = gets.chomp
 
-    @user = User.new(user_name)
+    @black_jack = BlackJack.new(user_name)
 
-    @action_black_jack = ActionBlackJack.new(@black_jack, @user)
-
-    @black_jack.play_deck.each do |card|
-      print card.card[:suit][:icon_code]
-    end
-    # puts @black_jack.play_deck.size
-  end
-
-  def start
-    # puts 'Представьтесь'
-    # user_name = gets.chomp
-
-    # user = User.new(user_name)
-
-    # @action_black_jack = ActionBlackJack.new(@black_jack, user)
-
-    # loop do
-    # end
+    @action_black_jack = ActionBlackJack.new(@black_jack)
   end
 
   def send_cards
-    puts 'test'
-    puts @action_black_jack.deal_two_cards_user
+    @action_black_jack.deal_two_cards_user
   end
 
   def user_cards
-    @user.print_cards
+    @action_black_jack.user_cards
   end
 end

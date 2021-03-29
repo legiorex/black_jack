@@ -1,8 +1,8 @@
 class Card
-  attr_accessor :card
+  attr_accessor :name, :suit
 
   def initialize(name, suit)
-    @card = {}
-    @card = { name: name, suit: suit }
+    @name = name
+    @suit = suit
   end
 end
