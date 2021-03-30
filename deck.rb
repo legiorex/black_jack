@@ -7,15 +7,8 @@ class Deck
   end
 
   def add_card_deck
-    suits = [{ suit_tile: 'Пики', icon_code: "\u2660" },
-             { suit_tile: 'Черви', icon_code: "\u2665" },
-             { suit_tile: 'Крести', icon_code: "\u2663" },
-             { suit_tile: 'Бубен', icon_code: "\u2666" }]
-
-    names_card = [(2..10).to_a, 'Валет', 'Дама', 'Король', 'Туз'].flatten.map(&:to_s)
-
-    suits.each do |suit|
-      names_card.each do |name|
+    Card::SUITS.each do |suit|
+      Card::NAME_CARD.each do |name|
         @cards << Card.new(name, suit)
       end
     end
