@@ -28,7 +28,8 @@ class ActionBlackJack
 
   def bet
     @user.money -= 10
-    @black_jack += 10
+    @dealer.money -= 10
+    @black_jack.bank = 20
   end
 
   def actions_dealer
@@ -61,10 +62,6 @@ class ActionBlackJack
         deal_cards_user(1)
         user_cards
         actions_dealer
-        # else
-
-        #   choise_move = 'exit'
-
       end
 
       break if @end_game
@@ -79,14 +76,23 @@ class ActionBlackJack
 
   def check_vin
     if @user.points == 21 || 21 > @user.points && @user.points > @dealer.points
+      @user.money += @black_jack.bank
       puts 'Вы выйграли!'
       puts "Ваши деньги #{@user.money}"
+
     else
       puts 'Вы проиграли!'
       puts "Ваши деньги #{@user.money}"
 
     end
     @end_game = true
+  end
+
+  def reset_game
+    @end_game = false
     @move_dealer = false
+    @user.reset_data
+    @dealer.reset_data
+    @deck.add_card_deck
   end
 end

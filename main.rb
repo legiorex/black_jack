@@ -36,6 +36,8 @@ class Main
   end
 
   def start_game
+    @action_black_jack.reset_game
+    @action_black_jack.bet
     @action_black_jack.deal_cards_user(2)
     @action_black_jack.deal_cards_dealer(2)
     @action_black_jack.user_cards

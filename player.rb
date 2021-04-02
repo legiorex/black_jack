@@ -48,4 +48,9 @@ class Player
 
     end
   end
+  def reset_data
+    @cards = []
+    @points = 0
+  end
+
 end
