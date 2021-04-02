@@ -23,21 +23,12 @@ class Main
     @action_black_jack = ActionBlackJack.new(@black_jack)
   end
 
-  # def send_cards
-  #   @action_black_jack.deal_two_cards_user
-  # end
-
-  # def user_cards
-  #   @action_black_jack.user_cards
-  # end
-
   def control
+    puts 'start - начало игры'
+    puts 'exit - выход из игры'
+
     loop do
-      puts 'start - начало игры'
-      puts 'exit - выход из игры'
-
       choise = gets.chomp
-
       start_game if choise == 'start'
 
       break if choise == 'exit'
@@ -45,8 +36,35 @@ class Main
   end
 
   def start_game
-    @action_black_jack.deal_two_cards_user
+    @action_black_jack.deal_cards_user(2)
+    @action_black_jack.deal_cards_dealer(2)
     @action_black_jack.user_cards
+    @action_black_jack.dealer_cards
+
+    loop do
+      puts '1 --- взять карту'
+      puts '2 --- пропустить ход'
+      puts '3 --- открыть карты'
+
+      choise_move = gets.chomp.to_i
+
+      case choise_move
+      when 1
+        @action_black_jack.deal_cards_user(1)
+        @action_black_jack.user_cards
+
+      when 2
+
+      when 3
+
+      else
+
+        choise_move = 'exit'
+
+      end
+
+      break if choise_move == 'exit'
+    end
   end
 end
 

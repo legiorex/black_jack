@@ -7,16 +7,11 @@ class User < Player
   end
 
   def print_cards
-    puts "#{@name} ваши карты"
+    puts "******* #{@name} ваши карты ****** \n \n"
     cards.each do |card|
       puts "#{card.name} #{card.suit[:suit_tile]} #{card.suit[:icon_code]}"
     end
-    puts "ваши очки #{count_points}"
+    count_points
+    puts "ваши очки #{points} \n \n"
   end
-
-  # def points
-  #   cards.each do |card|
-  #     puts "#{card.name} #{card.suit[:suit_tile]} #{card.suit[:icon_code]}"
-  #   end
-  # end
 end
