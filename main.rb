@@ -39,32 +39,9 @@ class Main
     @action_black_jack.deal_cards_user(2)
     @action_black_jack.deal_cards_dealer(2)
     @action_black_jack.user_cards
-    @action_black_jack.dealer_cards
+    @action_black_jack.dealer_cards(false)
 
-    loop do
-      puts '1 --- взять карту'
-      puts '2 --- пропустить ход'
-      puts '3 --- открыть карты'
-
-      choise_move = gets.chomp.to_i
-
-      case choise_move
-      when 1
-        @action_black_jack.deal_cards_user(1)
-        @action_black_jack.user_cards
-
-      when 2
-
-      when 3
-
-      else
-
-        choise_move = 'exit'
-
-      end
-
-      break if choise_move == 'exit'
-    end
+    @action_black_jack.actions_user
   end
 end
 
