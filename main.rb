@@ -30,7 +30,7 @@ class Main
     loop do
       choise = gets.chomp
       start_game if choise == 'start'
-
+      final_menu if @action_black_jack.end_game
       break if choise == 'exit'
     end
   end
@@ -42,6 +42,18 @@ class Main
     @action_black_jack.dealer_cards(false)
 
     @action_black_jack.actions_user
+  end
+
+  def final_menu
+    puts 'start - играть снова' if @action_black_jack.user.money > 10
+    puts 'exit - выход из игры'
+
+    loop do
+      choise = gets.chomp
+      start_game if choise == 'start' && @action_black_jack.user.money > 10
+
+      break if choise == 'exit'
+    end
   end
 end
 

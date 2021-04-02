@@ -1,10 +1,13 @@
 class ActionBlackJack
+  attr_reader :end_game, :user
+
   def initialize(black_jack)
     @deck = black_jack.deck
     @user = black_jack.user
     @dealer = black_jack.dealer
     @black_jack = black_jack
     @move_dealer = false
+    @end_game = false
   end
 
   def deal_cards_user(count)
@@ -58,13 +61,13 @@ class ActionBlackJack
         deal_cards_user(1)
         user_cards
         actions_dealer
-      else
+        # else
 
-        choise_move = 'exit'
+        #   choise_move = 'exit'
 
       end
 
-      break if choise_move == 'exit'
+      break if @end_game
     end
   end
 
@@ -77,8 +80,13 @@ class ActionBlackJack
   def check_vin
     if @user.points == 21 || 21 > @user.points && @user.points > @dealer.points
       puts 'Вы выйграли!'
+      puts "Ваши деньги #{@user.money}"
     else
       puts 'Вы проиграли!'
+      puts "Ваши деньги #{@user.money}"
+
     end
+    @end_game = true
+    @move_dealer = false
   end
 end
