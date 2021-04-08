@@ -1,2 +1,0 @@
-class ActionsCard
-end

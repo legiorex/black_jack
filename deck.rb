@@ -3,23 +3,19 @@ class Deck
 
   def initialize
     @cards = []
-    add_card_deck
+    generate_cards
   end
 
-  def add_card_deck
+  def generate_cards
     Card::SUITS.each do |suit|
-      Card::NAME_CARD.each do |name|
-        @cards << Card.new(name, suit)
+      Card::RANKS.each do |rank|
+        @cards << Card.new(suit, rank)
       end
     end
+    @cards.shuffle!
   end
 
-  def random_cards(count)
-    result = @cards.sample(count)
-
-    result.each do |card|
-      @cards.delete(card)
-    end
-    result
+  def give_card
+    @cards.pop
   end
 end

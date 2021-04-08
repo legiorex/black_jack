@@ -1,17 +1,30 @@
 class Card
-  attr_accessor :name, :suit
+  attr_reader :suit, :rank, :value
 
-  SUITS = [{ suit_tile: 'Пики', icon_code: "\u2660" },
-           { suit_tile: 'Черви', icon_code: "\u2665" },
-           { suit_tile: 'Крести', icon_code: "\u2663" },
-           { suit_tile: 'Бубен', icon_code: "\u2666" }]
+  SUITS = %w[♦ ♥ ♠ ♣]
+  RANKS = [(2..10).to_a, 'J', 'Q', 'K', 'A'].flatten.map(&:to_s)
 
-  NAME_CARD = [(2..10).to_a, 'Валет', 'Дама', 'Король', 'Туз'].flatten.map(&:to_s)
-
-  def initialize(name, suit)
-    @name = name
+  def initialize(suit, rank)
     @suit = suit
+    @rank = rank
+    @value = calculate_value(rank)
   end
 
-  def points; end
+  def calculate_value(rank)
+    if rank == 'A'
+      11
+    elsif %w[J Q K].include?(rank)
+      10
+    else
+      rank.to_i
+    end
+  end
+
+  def face
+    "#{@suit}#{@rank}"
+  end
+
+  def ace?
+    rank == 'A'
+  end
 end

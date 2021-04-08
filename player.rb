@@ -1,56 +1,37 @@
 class Player
-  attr_accessor :money, :cards, :points
+  attr_accessor :name, :money, :cards, :points
 
-  # attr_reader :points
+  BALANCE = 100
 
-  NAME_CARD = %w[Валет Дама Король Туз]
-
-  BLACK_JACK = 21
-
-  def initialize
-    @money = 100
+  def initialize(name)
+    @name = name
+    @money = BALANCE
     @cards = []
     @points = 0
-    # @cards << Card.new('Туз', { suit_tile: 'Бубен', icon_code: "\u2666" })
-    # @cards << Card.new('9', { suit_tile: 'Бубен', icon_code: "\u2666" })
   end
 
-  def count_points
-    @points = 0
-
-    aces = cards.find_all { |card| card.name.include?('Туз') }
-
-    if aces.empty?
-
-      cards.each do |card|
-        @points += card.name.to_i.zero? ? 10 : card.name.to_i
-      end
-    else
-
-      clear_cards = cards - aces
-
-      points_clear_cards = 0
-
-      clear_cards.each do |card|
-        points_clear_cards += card.name.to_i.zero? ? 10 : card.name.to_i
-      end
-
-      aces.each do
-        if points_clear_cards >= BLACK_JACK || points_clear_cards + 11 > BLACK_JACK
-          points_clear_cards += 1
-
-        elsif points_clear_cards + 11 <= BLACK_JACK
-          points_clear_cards += 11
-        end
-      end
-
-      @points = points_clear_cards
-
+  def calculate_points
+    @points = @cards.sum(&:value)
+    @cards.select(&:ace?).each do
+      @points -= 10 if @points > 21
     end
+    @points
   end
+
   def reset_data
     @cards = []
     @points = 0
   end
 
+  def take_card(deck, count = 1)
+    count.times do
+      @cards << deck.give_card if @cards.size < 3
+    end
+    calculate_points
+  end
+
+  # def take_money; end
+  # def give_money
+
+  # end
 end
